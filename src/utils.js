@@ -35,4 +35,18 @@ const inputIntegerFromUser = async (promptMessage) => {
   }
 };
 
-export { rollDice, inputStringFromUser, inputIntegerFromUser };
+const inputPlayerDetails = async () => {
+  const name = await inputStringFromUser("Enter Player's Name: ");
+  const health = await inputIntegerFromUser(`Enter ${name}'s health: `);
+  const attack = await inputIntegerFromUser(`Enter ${name}'s attack: `);
+  const strength = await inputIntegerFromUser(`Enter ${name}'s strength: `);
+
+  return { name, health, attack, strength };
+};
+
+export {
+  rollDice,
+  inputStringFromUser,
+  inputIntegerFromUser,
+  inputPlayerDetails,
+};
