@@ -1,7 +1,7 @@
 import { inputStringFromUser, inputIntegerFromUser } from "./src/utils.js";
+import { Arena } from "./src/arena.js";
 
 const main = async () => {
-
   const inputPlayerDetails = async () => {
     const name = await inputStringFromUser("Enter Player's Name:  ");
     const health = await inputIntegerFromUser(`Enter ${name}'s health:  `);
@@ -15,8 +15,13 @@ const main = async () => {
 
   const { name, health, attack, strength } = await inputPlayerDetails();
 
-  console.log(name, health, attack, strength);
-  
+  const arena = new Arena();
+
+  arena.addPlayer(name, health, attack, strength);
+
+  arena.displayAllPlayers();
+
+//   console.log(name, health, attack, strength);
 };
 
 main();
