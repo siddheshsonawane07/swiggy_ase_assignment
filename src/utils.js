@@ -7,6 +7,7 @@ const rl = createInterface({
 
 const rollDice = () => Math.floor(Math.random() * 6) + 1;
 
+// Function to get a string input from the user
 const inputStringFromUser = async (prompt) => {
   return new Promise((resolve, reject) => {
     rl.question(prompt, (inputString) => {
@@ -21,6 +22,8 @@ const inputStringFromUser = async (prompt) => {
     });
   });
 };
+
+// Function to get a number input from the user
 const inputIntegerFromUser = async (promptMessage) => {
   return new Promise((resolve, reject) => {
     rl.question(promptMessage, (input) => {
@@ -35,6 +38,7 @@ const inputIntegerFromUser = async (promptMessage) => {
   });
 };
 
+// Function to input details of a player
 const inputPlayerDetails = async () => {
   const name = await inputStringFromUser("Enter Player's Name: ");
   const health = await inputIntegerFromUser(`Enter ${name}'s health: `);
@@ -43,6 +47,7 @@ const inputPlayerDetails = async () => {
 
   if (!name || health <= 0 || attack <= 0 || strength <= 0) {
     console.log("Invalid player details. Please enter valid values.");
+    // Recursively call inputPlayerDetails for valid input
     return inputPlayerDetails();
   }
 

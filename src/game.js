@@ -1,11 +1,11 @@
 import { inputPlayerDetails, inputIntegerFromUser } from "./utils.js";
 import { Arena } from "./arena.js";
-
 class Game {
   constructor() {
     this.arena = new Arena();
   }
 
+  // Method to display the game menu
   displayMenu() {
     console.log("\n===== Game Menu =====");
     console.log("1. Add Player");
@@ -14,6 +14,7 @@ class Game {
     console.log("4. Exit");
   }
 
+  // Method to handle user menu choices asynchronously
   async handleMenuChoice(choice) {
     switch (choice) {
       case 1:
@@ -36,10 +37,8 @@ class Game {
 
         console.log("\nBattle:");
         console.log("Select players to battle:");
-
         const player1 = await inputIntegerFromUser("Enter Player 1 ID: ");
         const player2 = await inputIntegerFromUser("Enter Player 2 ID: ");
-
         this.arena.battle(player1, player2);
         break;
 

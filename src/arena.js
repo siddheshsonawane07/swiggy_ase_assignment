@@ -2,12 +2,12 @@ import Player from "./player.js";
 import { rollDice } from "./utils.js";
 
 class Arena {
-  //array of player objects
+  //Array of player objects
   players = [];
   totalPlayers = 0;
 
   addPlayer(name, health, strength, attack) {
-    const id = this.totalPlayers++; // Assign unique ID
+    const id = this.totalPlayers++;
     const player = new Player(id, name, health, strength, attack);
     this.players.push(player);
   }
@@ -26,7 +26,6 @@ class Arena {
   }
 
   battle(player1Id, player2Id) {
-    // Invalid player IDs
     if (
       player1Id < 0 ||
       player1Id >= this.players.length ||
@@ -37,7 +36,6 @@ class Arena {
       return;
     }
 
-    // Same player ID for both players
     if (player1Id === player2Id) {
       console.log("Error: A player cannot battle themselves.");
       return;
@@ -45,7 +43,8 @@ class Arena {
 
     let attacker = this.players[player1Id];
     let defender = this.players[player2Id];
-    // Players with zero or negative health should not be able to battle
+
+    // players with zero or negative health should not be able to battle
     if (attacker.health <= 0 || defender.health <= 0) {
       console.log(
         "Error: One or both players have zero or negative health and cannot battle."
@@ -61,12 +60,11 @@ class Arena {
     console.log(`\n===== Battle: ${attacker.name} vs ${defender.name} =====`);
 
     while (attacker.health > 0 && defender.health > 0) {
-      // Perform attack and defend actions
       this.performAttack(attacker, defender);
 
       if (defender.health <= 0) break;
 
-      // Switch roles for the next round
+      // switch roles for the next round
       [attacker, defender] = [defender, attacker];
     }
 
@@ -74,6 +72,7 @@ class Arena {
     console.log(`${winner.name} wins the battle!\n`);
   }
 
+  //main battle logic
   performAttack(attacker, defender) {
     const attackRoll = rollDice();
     const defendRoll = rollDice();
