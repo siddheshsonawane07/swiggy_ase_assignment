@@ -35,8 +35,4 @@ const inputIntegerFromUser = async (promptMessage) => {
   }
 };
 
-export default {
-  rollDice,
-  inputStringFromUser,
-  inputIntegerFromUser,
-};
+export { rollDice, inputStringFromUser, inputIntegerFromUser };
