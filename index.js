@@ -2,6 +2,8 @@ import { inputStringFromUser, inputIntegerFromUser } from "./src/utils.js";
 import { Arena } from "./src/arena.js";
 
 const main = async () => {
+  const arena = new Arena();
+
   const inputPlayerDetails = async () => {
     const name = await inputStringFromUser("Enter Player's Name:  ");
     const health = await inputIntegerFromUser(`Enter ${name}'s health:  `);
@@ -11,17 +13,23 @@ const main = async () => {
     return { name, health, attack, strength };
   };
 
-  console.log("Game started");
+  while (true) {
+    console.log("Game started");
 
-  const { name, health, attack, strength } = await inputPlayerDetails();
+    console.log("Add Player ");
+    const { name, health, attack, strength } = await inputPlayerDetails();
 
-  const arena = new Arena();
+    arena.addPlayer(name, health, attack, strength);
 
-  arena.addPlayer(name, health, attack, strength);
+    arena.displayAllPlayers();
 
-  arena.displayAllPlayers();
-
-//   console.log(name, health, attack, strength);
+    const option = await inputStringFromUser(
+      "Add another player? (yes/no): "
+    );
+    if (option.toLowerCase() !== "yes") {
+      break; 
+    }
+  }
 };
 
 main();
