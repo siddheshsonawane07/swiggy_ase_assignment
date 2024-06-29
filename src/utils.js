@@ -8,31 +8,31 @@ const rl = createInterface({
 const rollDice = () => Math.floor(Math.random() * 6) + 1;
 
 const inputStringFromUser = async (prompt) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     rl.question(prompt, (inputString) => {
-      resolve(inputString.trim());
+      const trimmedString = inputString.trim();
+      const isValid = /^[a-zA-Z\s]+$/.test(trimmedString);
+      if (isValid) {
+        resolve(trimmedString);
+      } else {
+        console.log("Invalid input. Please enter valid string.");
+        reject(new Error("Invalid input"));
+      }
     });
   });
 };
-
 const inputIntegerFromUser = async (promptMessage) => {
-  try {
-    const inputString = await new Promise((resolve) => {
-      rl.question(promptMessage, (input) => {
-        resolve(input.trim());
-      });
+  return new Promise((resolve, reject) => {
+    rl.question(promptMessage, (input) => {
+      const userInput = Number.parseInt(input.trim(), 10);
+      if (!Number.isNaN(userInput) && Number.isSafeInteger(userInput)) {
+        resolve(userInput);
+      } else {
+        console.log("Invalid input. Please enter a valid integer.");
+        reject(new Error("Invalid input"));
+      }
     });
-
-    const userInput = Number.parseInt(inputString, 10);
-    if (!Number.isNaN(userInput) && Number.isSafeInteger(userInput)) {
-      return userInput;
-    } else {
-      console.log("error");
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  });
 };
 
 const inputPlayerDetails = async () => {
@@ -40,6 +40,11 @@ const inputPlayerDetails = async () => {
   const health = await inputIntegerFromUser(`Enter ${name}'s health: `);
   const attack = await inputIntegerFromUser(`Enter ${name}'s attack: `);
   const strength = await inputIntegerFromUser(`Enter ${name}'s strength: `);
+
+  if (!name || health <= 0 || attack <= 0 || strength <= 0) {
+    console.log("Invalid player details. Please enter valid values.");
+    return inputPlayerDetails();
+  }
 
   return { name, health, attack, strength };
 };

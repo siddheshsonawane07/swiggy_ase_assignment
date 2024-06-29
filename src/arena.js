@@ -13,14 +13,45 @@ class Arena {
   }
 
   displayAllPlayers() {
+    if (this.players.length === 0) {
+      console.log("No players in the arena.");
+      return;
+    }
+    console.log("| ID | Name | Health | Strength | Attack |");
     this.players.forEach((player) => {
-      console.log(`Player ID: ${player.id}, Name: ${player.name}`);
+      console.log(
+        `| ${player.id} | ${player.name} | ${player.health} | ${player.strength} | ${player.attack} |`
+      );
     });
   }
 
   battle(player1Id, player2Id) {
+    // Invalid player IDs
+    if (
+      player1Id < 0 ||
+      player1Id >= this.players.length ||
+      player2Id < 0 ||
+      player2Id >= this.players.length
+    ) {
+      console.log("Error: One or both player IDs are invalid.");
+      return;
+    }
+
+    // Same player ID for both players
+    if (player1Id === player2Id) {
+      console.log("Error: A player cannot battle themselves.");
+      return;
+    }
+
     let attacker = this.players[player1Id];
     let defender = this.players[player2Id];
+    // Players with zero or negative health should not be able to battle
+    if (attacker.health <= 0 || defender.health <= 0) {
+      console.log(
+        "Error: One or both players have zero or negative health and cannot battle."
+      );
+      return;
+    }
 
     // one with lower health will attack first
     if (defender.health < attacker.health) {
@@ -30,7 +61,6 @@ class Arena {
     console.log(`\n===== Battle: ${attacker.name} vs ${defender.name} =====`);
 
     while (attacker.health > 0 && defender.health > 0) {
-      
       // Perform attack and defend actions
       this.performAttack(attacker, defender);
 

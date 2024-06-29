@@ -29,10 +29,17 @@ class Game {
         break;
 
       case 3:
+        if (this.arena.players.length < 2) {
+          console.log("Not enough players to start a battle.");
+          break;
+        }
+
         console.log("\nBattle:");
         console.log("Select players to battle:");
+
         const player1 = await inputIntegerFromUser("Enter Player 1 ID: ");
         const player2 = await inputIntegerFromUser("Enter Player 2 ID: ");
+
         this.arena.battle(player1, player2);
         break;
 
