@@ -84,7 +84,7 @@ const Test = async () => {
   const game = new TestGame();
 
   // Test displayMenu
-  console.log("Testing displayMenu: Test Case 1");
+  console.log("Test Case 1: Testing displayMenu");
   try {
     game.displayMenu();
     console.log();
@@ -96,7 +96,7 @@ const Test = async () => {
   // Test handleMenuChoice for adding the first player
   console.log();
   console.log(
-    "Testing handleMenuChoice for adding the first player: Test Case 2\n"
+    "Test Case 2: Testing handleMenuChoice for adding the first player\n"
   );
   await game.handleMenuChoice(1);
   if (
@@ -111,7 +111,7 @@ const Test = async () => {
   // Test handleMenuChoice for adding the second player
   console.log();
   console.log(
-    "Testing handleMenuChoice for adding the second player: Test Case 3\n"
+    "Test Case 3: Testing handleMenuChoice for adding the second player\n"
   );
   await game.handleMenuChoice(1);
   if (
@@ -125,7 +125,7 @@ const Test = async () => {
 
   // Test handleMenuChoice for viewing players
   console.log();
-  console.log("Testing handleMenuChoice for viewing players: Test Case 4\n");
+  console.log("Test Case 4: Testing handleMenuChoice for viewing players\n");
   try {
     await game.handleMenuChoice(2);
     console.log("Test Case 4 passed\n");
@@ -136,7 +136,7 @@ const Test = async () => {
   // Test handleMenuChoice for battling
   console.log();
   console.log(
-    "Testing handleMenuChoice for battling with enough players: Test Case 5\n"
+    "Test Case 5: Testing handleMenuChoice for battling with enough players\n"
   );
   try {
     await game.handleMenuChoice(3);
@@ -147,7 +147,7 @@ const Test = async () => {
 
   // Test handleMenuChoice for exiting the game
   console.log();
-  console.log("Testing handleMenuChoice for exiting the game: Test Case 6\n");
+  console.log("Test Case 6: Testing handleMenuChoice for exiting the game\n");
   //   let exited = false;
   //   process.exit = () => {
   //     exited = true;
